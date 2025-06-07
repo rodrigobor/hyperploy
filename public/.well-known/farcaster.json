@@ -1,0 +1,11 @@
+{
+  "frame": {
+    "version": "1",
+    "name": "Hyperploy",
+    "homeUrl": "https://hyperploy.vercel.app",
+    "iconUrl": "https://hyperploy.vercel.app/logo.png",
+    "splashImageUrl": "https://hyperploy.vercel.app/logo.png",
+    "splashBackgroundColor": "#ffffff",
+    "description": "Deploy smart contracts on HyperEVM with fixed cost and automatic remainder."
+  }
+}
