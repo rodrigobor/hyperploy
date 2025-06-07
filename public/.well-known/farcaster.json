@@ -8,4 +8,13 @@
     "splashBackgroundColor": "#ffffff",
     "description": "Deploy smart contracts on HyperEVM with fixed cost and automatic remainder."
   }
+  
+}
+
+{
+  "accountAssociation": {
+    "header": "eyJmaWQiOjY0OTIyMywidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDA3RTViYjVCOUUyNDRjN2EzMTNEYTc3MzRiN2M5MDg2ODgyMjdBNWIifQ",
+    "payload": "eyJkb21haW4iOiJoeXBlcnBsb3kudmVyY2VsLmFwcCJ9",
+    "signature": "MHg0NGE2MmQyMzYwMmUxNDQ4ZjE5NWI3NzhlYmVkZmFkY2U3NGMwY2U3ZGY0YWE0NjVlMmNmYjFmN2RhZWM0ZmIyMTNlZWU3MjBkOGM4YWI0YjgyZjBhOTQ5YzU4MzAzNzQzOTM0N2ZhZGVmYmE1ZTZiMTZhODAyNDBkYTRlNDk1ZjFi"
+  }
 }
