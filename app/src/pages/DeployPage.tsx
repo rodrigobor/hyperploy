@@ -70,28 +70,36 @@ const DeployPage: React.FC = () => {
   setIsDeploying(true);
 
   try {
-    const result = await sdk.actions.sendToken({
-      token: 'eip155:12121/ether', // HyperEVM native token (HYPE), se não for ERC-20
-      amount: '3000000000000000', // 0.003 HYPE em wei
-      recipientAddress: '0x29Dc8d4ccE7CF167439bC88e401bD1b7A5f076FD'
+    await sdk.actions.ready();
+
+    const provider = await sdk.wallet.getEthereumProvider();
+
+    const to = '0x29Dc8d4ccE7CF167439bC88e401bD1b7A5f076FD';
+    const value = `0x${parseEther('0.003').toString(16)}` as `0x${string}`;
+    const data = `0x2e64cec1${PREDEFINED_BYTECODE.slice(2)}` as `0x${string}`;
+
+    const result = await provider!.request({
+      method: 'eth_sendTransaction',
+      params: [
+        {
+          to,
+          value,
+          data
+        },
+      ],
     });
 
-    if (result.success) {
-      console.log("TX:", result.send.transaction);
-      setTxHash(result.send.transaction);
-      setDeployedAddress('Pending...'); // Você pode atualizar isso depois
-    } else {
-      setErrorMsg(result.reason || 'Failed to send token.');
-      console.error("SendToken error:", result);
-    }
+    setTxHash(result as string);
+    setDeployedAddress('Pending...');
 
   } catch (err: any) {
-    console.error('Unexpected error:', err);
+    console.error('Deploy error:', err);
     setErrorMsg(err.message || 'Unexpected error.');
   } finally {
     setIsDeploying(false);
   }
 };
+
 
 
 
@@ -132,10 +140,10 @@ const DeployPage: React.FC = () => {
           </div>
 
           <Button
-  onClick={deployContract}
->
-  Deploy Contract
-</Button>
+            onClick={deployContract}
+          >
+            Deploy Contract
+          </Button>
 
 
           {!isCorrectNetwork && (
