@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
-  },
+  "postinstall": "npm install",
+  "build": "vite build",
+  "start": "vite",
+  "preview": "vite preview"
+},
   "dependencies": {
     "ethers": "^6.14.3",
     "react": "^18.2.0",
