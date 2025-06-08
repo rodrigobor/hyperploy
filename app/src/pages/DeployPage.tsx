@@ -11,7 +11,8 @@ declare global {
   }
 }
 
-export const PREDEFINED_BYTECODE = '0x6080604052348015600e575f5ffd5b...'; // Truncado aqui por brevidade
+export const PREDEFINED_BYTECODE = "0x6080604052348015600e575f5ffd5b506101268061001c5f395ff3fe6080604052348015600e575f5ffd5b50600436106030575f3560e01c80633fa4f24514603457806360fe47b114604e575b5f5ffd5b603a6066565b60405160459190608a565b60405180910390f35b606460048036038101906060919060ca565b606b565b005b5f5481565b805f8190555050565b5f819050919050565b6084816074565b82525050565b5f602082019050609b5f830184607d565b92915050565b5f5ffd5b60ac816074565b811460b5575f5ffd5b50565b5f8135905060c48160a5565b92915050565b5f6020828403121560dc5760db60a1565b5b5f60e78482850160b8565b9150509291505056fea26469706673582212206dba4cc3b7cf7194f080fb70fd7cc0f7dd233c112fc2407044943b89a267706864736f6c634300081e0033";
+
 
 const DeployPage: React.FC = () => {
   const [estimatedGas] = React.useState('180,000');
@@ -131,12 +132,11 @@ const DeployPage: React.FC = () => {
           </div>
 
           <Button
-            onClick={deployContract}
-            className={!isCorrectNetwork ? 'opacity-50 cursor-not-allowed' : ''}
-            disabled={!isCorrectNetwork}
-          >
-            Deploy Contract
-          </Button>
+  onClick={deployContract}
+>
+  Deploy Contract
+</Button>
+
 
           {!isCorrectNetwork && (
             <p className="mt-2 text-yellow-400 text-sm">
