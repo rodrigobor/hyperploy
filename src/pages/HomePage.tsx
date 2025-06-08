@@ -16,12 +16,6 @@ const HomePage: React.FC = () => {
           <div className="w-10 h-10 bg-hl-accent rounded-full mr-3"></div>
           <h1 className="text-2xl font-bold">Hyperploy</h1>
         </div>
-        <button 
-          onClick={handleConnectWallet}
-          className="bg-hl-accent text-hl-dark font-semibold py-2 px-4 rounded-lg hover:bg-hl-accent-light transition-all"
-        >
-          Connect Wallet
-        </button>
       </header>
       
       <main className="max-w-4xl mx-auto px-6 py-12">
