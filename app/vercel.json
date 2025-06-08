@@ -1,6 +1,9 @@
 {
-  "rootDirectory": "app",
   "buildCommand": "npm run build",
+  "outputDirectory": "app/dist",
   "installCommand": "npm install",
-  "outputDirectory": "dist"
+  "rootDirectory": "app",
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
