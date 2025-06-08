@@ -1,7 +1,7 @@
 {
   "buildCommand": "npm run build",
   "installCommand": "npm install",
-  "outputDirectory": "dist",
+  "outputDirectory": "build",
   "build": {
     "env": {
       "VERCEL_PACKAGE_MANAGER": "npm"
