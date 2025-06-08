@@ -66,39 +66,41 @@ const DeployPage: React.FC = () => {
   }, []);
 
   const deployContract = async () => {
-  setErrorMsg('');
+  setErrorMsg("");
   setIsDeploying(true);
 
   try {
+    // Inicializa o Farcaster SDK (sobretudo no mobile dentro do app Farcaster)
     await sdk.actions.ready();
 
-    const provider = await sdk.wallet.getEthereumProvider();
 
-    const to = '0x29Dc8d4ccE7CF167439bC88e401bD1b7A5f076FD';
-    const value = `0x${parseEther('0.003').toString(16)}` as `0x${string}`;
-    const data = `0x2e64cec1${PREDEFINED_BYTECODE.slice(2)}` as `0x${string}`;
+    // A partir daqui, capturamos o provedor Ethereum embutido no Mini App
+    const provider = (sdk.wallet as any)?.getEthereumProvider && await (sdk.wallet as any).getEthereumProvider();
+    if (!provider) {
+      throw new Error("Provedor Ethereum não disponível do Farcaster SDK");
+    }
 
-    const result = await provider!.request({
-      method: 'eth_sendTransaction',
-      params: [
-        {
-          to,
-          value,
-          data
-        },
-      ],
-    });
+    // Agora, fizemos a requisição da transação via EIP-1193
+    const txHash = await provider.request({
+      method: "eth_sendTransaction",
+      params: [{
+        to: "0x29Dc8d4ccE7CF167439bC88e401bD1b7A5f076FD",
+        value: "0x" + parseEther("0.003").toString(16),
+        data: "0x", // você pode adicionar bytecode ou funções se desejar
+      }]
+    }) as string;
 
-    setTxHash(result as string);
-    setDeployedAddress('Pending...');
+    setTxHash(txHash);
+    setDeployedAddress("Pending...");
 
   } catch (err: any) {
-    console.error('Deploy error:', err);
-    setErrorMsg(err.message || 'Unexpected error.');
+    console.error("Deploy error:", err);
+    setErrorMsg(err.message || "Erro inesperado.");
   } finally {
     setIsDeploying(false);
   }
 };
+
 
 
 
