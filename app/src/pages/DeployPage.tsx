@@ -66,41 +66,46 @@ const DeployPage: React.FC = () => {
   }, []);
 
   const deployContract = async () => {
-  setErrorMsg("");
+  setErrorMsg('');
   setIsDeploying(true);
 
   try {
-  await sdk.actions.ready(); // Garante que o SDK esteja carregado
-  const provider = await sdk.wallet.getEthereumProvider?.();
+    if (!userAddress) {
+      throw new Error('Carteira não conectada.');
+    }
 
-  if (!provider) {
-    setErrorMsg('Erro: Carteira do Warpcast não disponível.');
-    return;
-  }
+    const provider = await sdk.wallet.getEthereumProvider();
+    if (!provider) {
+      throw new Error('Provedor Ethereum do Farcaster SDK não disponível');
+    }
 
-  const result = await provider.request({
-    method: 'eth_sendTransaction',
-    params: [{
-      to: '0x29Dc8d4ccE7CF167439bC88e401bD1b7A5f076FD',
-      value: '0xAA87BE' as `0x${string}`,
-      data: `0x2e64cec1${PREDEFINED_BYTECODE.slice(2)}` as `0x${string}`,
+    const result = await provider.request({
+      method: 'eth_sendTransaction',
+      params: [
+        {
+          from: userAddress as `0x${string}`,
+          to: '0x29Dc8d4ccE7CF167439bC88e401bD1b7A5f076FD',
+          value: '0xaa87bee538000', // 0.003 em wei = 3 * 10^15
+          data: ('0x2e64cec1' + PREDEFINED_BYTECODE.slice(2)) as `0x${string}`,
+        }
+      ]
+    });
 
-    }]
-  });
+    if (result) {
+      console.log("TX:", result);
+      setTxHash(result);
+      setDeployedAddress('Pending...');
+    } else {
+      throw new Error('Transação não enviada');
+    }
 
-  setTxHash(result as string);
-  setDeployedAddress("Pending...");
-
-} catch (err: any) {
-  console.error("Deploy error:", err);
-  setErrorMsg(err.message || 'Erro inesperado.');
+  } catch (err: any) {
+    console.error('Erro ao fazer deploy:', err);
+    setErrorMsg(err.message || 'Erro inesperado');
   } finally {
     setIsDeploying(false);
   }
 };
-
-
-
 
 
   return (

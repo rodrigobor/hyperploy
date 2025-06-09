@@ -12,5 +12,9 @@
     "splashImageUrl": "https://hyperploy.vercel.app/logo-1.png",
     "splashBackgroundColor": "#ffffff",
     "description": "Deploy smart contracts on HyperEVM with fixed cost and automatic remainder."
-  }
+  },
+  "requiredCapabilities": [
+  "wallet.getEthereumProvider"
+]
+
 }
