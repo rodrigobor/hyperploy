@@ -5,7 +5,7 @@
     "signature": "MHg0NGE2MmQyMzYwMmUxNDQ4ZjE5NWI3NzhlYmVkZmFkY2U3NGMwY2U3ZGY0YWE0NjVlMmNmYjFmN2RhZWM0ZmIyMTNlZWU3MjBkOGM4YWI0YjgyZjBhOTQ5YzU4MzAzNzQzOTM0N2ZhZGVmYmE1ZTZiMTZhODAyNDBkYTRlNDk1ZjFi"
   },
   "dependencies": {
-  "@farcaster/frame-sdk": "^x.y.z"
+  "@farcaster/frame-sdk": "^0.0.63"
 },
   "frame": {
     "version": "1",
