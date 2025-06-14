@@ -61,8 +61,8 @@ const DeployPage: React.FC = () => {
   React.useEffect(() => {
   const init = async () => {
     console.log('SDK object:', sdk);
-    console.group('🔍 Debug SDK');
-console.log('sdk:', sdk);
+    console.group('SDK Debug');
+console.log('sdk imported as:', sdk);
 console.log('sdk.wallet:', sdk.wallet);
 console.log('sdk.wallet.getEthereumProvider:', sdk.wallet?.getEthereumProvider);
 console.groupEnd();
