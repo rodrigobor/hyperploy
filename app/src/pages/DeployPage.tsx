@@ -61,7 +61,12 @@ const DeployPage: React.FC = () => {
   React.useEffect(() => {
   const init = async () => {
     console.log('SDK object:', sdk);
-    console.log('methods:', Object.keys(sdk.wallet || {}));
+    console.group('🔍 Debug SDK');
+console.log('sdk:', sdk);
+console.log('sdk.wallet:', sdk.wallet);
+console.log('sdk.wallet.getEthereumProvider:', sdk.wallet?.getEthereumProvider);
+console.groupEnd();
+
 
     try {
       const isMiniApp = await sdk.isInMiniApp();
