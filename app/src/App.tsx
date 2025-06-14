@@ -6,27 +6,29 @@ import DeployPage from './pages/DeployPage';
 import SuccessPage from './pages/SuccessPage';
 import './styles/tailwind.css';
 
+import { WagmiConfig } from 'wagmi';
+import { wagmiConfig } from './wagmiConfig';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+
+const queryClient = new QueryClient();
+
 function App() {
-  const [isReady, setIsReady] = useState(false);
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
     const initialize = async () => {
       try {
         await Promise.race([
-          sdk.actions.ready(),
-          new Promise((resolve) => setTimeout(resolve, 1500)) // fallback
+          sdk.actions.ready({ disableNativeGestures: true }),
+          new Promise(resolve => setTimeout(resolve, 1500))
         ]);
-        setIsReady(true);
         await sdk.actions.addMiniApp();
       } catch (err) {
         console.error('Farcaster SDK init error:', err);
-        setIsReady(true); // ainda assim deixa o app prosseguir
       } finally {
         setShowSplash(false);
       }
     };
-
     initialize();
   }, []);
 
@@ -37,14 +39,19 @@ function App() {
       </div>
     );
   }
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/deploy" element={<DeployPage />} />
-        <Route path="/success" element={<SuccessPage />} />
-      </Routes>
-    </Router>
+    <WagmiConfig config={wagmiConfig}>
+      <QueryClientProvider client={queryClient}>
+        <Router>
+          <Routes>
+            <Route path="/" element={<HomePage />} />
+            <Route path="/deploy" element={<DeployPage />} />
+            <Route path="/success" element={<SuccessPage />} />
+          </Routes>
+        </Router>
+      </QueryClientProvider>
+    </WagmiConfig>
   );
 }
 

@@ -1,5 +1,7 @@
 {
   "dependencies": {
-    "@farcaster/frame-sdk": "^0.0.63"
+    "@farcaster/frame-sdk": "^0.0.63",
+    "@farcaster/frame-wagmi-connector": "^0.0.52",
+    "wagmi": "^2.15.6"
   }
 }
