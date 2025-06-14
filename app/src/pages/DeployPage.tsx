@@ -60,6 +60,9 @@ const DeployPage: React.FC = () => {
 
   React.useEffect(() => {
   const init = async () => {
+    console.log('SDK object:', sdk);
+    console.log('methods:', Object.keys(sdk.wallet || {}));
+
     try {
       const isMiniApp = await sdk.isInMiniApp();
       if (!isMiniApp) {
